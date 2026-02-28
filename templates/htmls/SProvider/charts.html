@@ -2,33 +2,33 @@
 {% block researchblock %}
 
 <style>
-    body{
+    body {
         background: #f3f6ff !important;
     }
 
     /* Main layout */
-    .chart-page{
+    .chart-page {
         padding: 18px 10px;
     }
 
     /* Sidebar card */
-    .side-card{
-        background: rgba(255,255,255,0.95);
-        border: 1px solid rgba(229,231,235,0.8);
+    .side-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(229, 231, 235, 0.8);
         border-radius: 18px;
-        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08);
         padding: 18px;
         height: 100%;
     }
 
-    .side-card h5{
+    .side-card h5 {
         font-size: 16px;
         font-weight: 800;
         color: #111827;
         margin-bottom: 14px;
     }
 
-    .chart-btn{
+    .chart-btn {
         display: block;
         width: 100%;
         text-decoration: none;
@@ -44,54 +44,54 @@
         text-align: center;
     }
 
-    .chart-btn:hover{
+    .chart-btn:hover {
         background: #eef2ff;
         border-color: #c7d2fe;
         transform: translateY(-1px);
     }
 
     /* Active style */
-    .chart-btn.active{
+    .chart-btn.active {
         background: linear-gradient(135deg, #2563eb, #3b82f6);
         color: white;
         border: none;
-        box-shadow: 0px 12px 26px rgba(37,99,235,0.25);
+        box-shadow: 0px 12px 26px rgba(37, 99, 235, 0.25);
     }
 
     /* Chart card */
-    .chart-card{
-        background: rgba(255,255,255,0.95);
-        border: 1px solid rgba(229,231,235,0.8);
+    .chart-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(229, 231, 235, 0.8);
         border-radius: 18px;
-        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.08);
         overflow: hidden;
     }
 
-    .chart-header{
+    .chart-header {
         padding: 18px 20px;
         background: linear-gradient(135deg, #2563eb, #3b82f6);
         color: white;
     }
 
-    .chart-header h4{
+    .chart-header h4 {
         margin: 0;
         font-size: 18px;
         font-weight: 800;
     }
 
-    .chart-header p{
+    .chart-header p {
         margin: 6px 0 0;
         font-size: 13px;
         opacity: 0.9;
     }
 
-    .chart-body{
+    .chart-body {
         padding: 18px 18px 22px 18px;
         background: #ffffff;
     }
 
     /* Canvas container */
-    #chartContainer{
+    #chartContainer {
         width: 100%;
         height: 420px;
         border-radius: 14px;
@@ -101,8 +101,8 @@
     }
 
     /* Responsive */
-    @media(max-width: 768px){
-        #chartContainer{
+    @media(max-width: 768px) {
+        #chartContainer {
             height: 320px;
         }
     }
@@ -116,19 +116,21 @@
             <div class="side-card">
                 <h5>📊 Chart Options</h5>
 
-                <a href="{% url 'charts' 'pie' %}"
-                   class="chart-btn {% if chart_type == 'pie' %}active{% endif %}">
+                <a href="{% url 'charts' 'pie' %}" class="chart-btn {% if chart_type == 'pie' %}active{% endif %}">
                     🥧 Pie Chart
                 </a>
 
-                <a href="{% url 'charts' 'line' %}"
-                   class="chart-btn {% if chart_type == 'line' %}active{% endif %}">
+                <a href="{% url 'charts' 'line' %}" class="chart-btn {% if chart_type == 'line' %}active{% endif %}">
                     📈 Line Chart
                 </a>
 
                 <a href="{% url 'charts' 'spline' %}"
-                   class="chart-btn {% if chart_type == 'spline' %}active{% endif %}">
+                    class="chart-btn {% if chart_type == 'spline' %}active{% endif %}">
                     📉 Spline Chart
+                </a>
+
+                <a href="{% url 'charts' 'bar' %}" class="chart-btn {% if chart_type == 'bar' %}active{% endif %}">
+                    📊 Bar Chart
                 </a>
 
                 <hr>
@@ -162,25 +164,34 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <script>
-window.onload = function () {
+    window.onload = function () {
 
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        backgroundColor: "transparent",
-        title: { text: "" },
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            backgroundColor: "transparent",
+            title: { text: "" },
+            axisX: {
+                labelAngle: -45,
+                interval: 1
+            },
+            toolTip: {
+                shared: true,
+                content: "{label}: {y}"
+            },
 
-        data: [{
+            data: [{
             {% if chart_type == "line" %}
                 type: "line",
             {% elif chart_type == "pie" %}
                 type: "pie",
             {% elif chart_type == "spline" %}
                 type: "spline",
+            {% elif chart_type == "bar" %}
+                type: "column",
             {% endif %}
 
             startAngle: 240,
             yValueFormatString: "##0.00\"%\"",
-            indexLabel: "{label} {y}",
             dataPoints: [
                 {% for o in form %}
                     { y: {{o.dcount}}, label: "{{o.names}}" },

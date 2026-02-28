@@ -127,6 +127,11 @@
                     📉 Spline Chart
                 </a>
 
+                <a href="{% url 'charts1' 'bar' %}"
+                   class="chart-btn {% if chart_type == 'bar' %}active{% endif %}">
+                    📊 Bar Chart
+                </a>
+
                 <hr>
 
                 <p style="font-size:12px;color:#6b7280;margin:0;">
@@ -164,6 +169,14 @@ window.onload = function () {
         animationEnabled: true,
         backgroundColor: "transparent",
         title: { text: "" },
+        axisX: {
+            labelAngle: -45,
+            interval: 1
+        },
+        toolTip: {
+            shared: true,
+            content: "{label}: {y}"
+        },
 
         data: [{
             {% if chart_type == "line" %}
@@ -172,11 +185,12 @@ window.onload = function () {
                 type: "pie",
             {% elif chart_type == "spline" %}
                 type: "spline",
+            {% elif chart_type == "bar" %}
+                type: "column",
             {% endif %}
 
             startAngle: 240,
             yValueFormatString: "##0.00\"%\"",
-            indexLabel: "{label} {y}",
             dataPoints: [
                 {% for o in form %}
                     { y: {{o.dcount}}, label: "{{o.names}}" },

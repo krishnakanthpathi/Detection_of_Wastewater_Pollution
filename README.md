@@ -57,6 +57,25 @@ You can now access the project at `http://127.0.0.1:8000/`.
 
 ---
 
+## 🔗 Available Routes
+
+Once the server is running, you can access the following URLs depending on your role.
+
+### Remote User (Client Interface)
+- **Login / Home**: `http://127.0.0.1:8000/`
+- **Register**: `http://127.0.0.1:8000/Register1/`
+- **View Profile**: `http://127.0.0.1:8000/ViewYourProfile/`
+- **Predict Pollution**: `http://127.0.0.1:8000/Predict_WasteWater_Pollution_Type/`
+
+### Service Provider (Admin Dashboard)
+*(Use `admin` as both username and password)*
+- **Admin Login**: `http://127.0.0.1:8000/serviceproviderlogin/`
+- **View All Registered Users**: `http://127.0.0.1:8000/View_Remote_Users/`
+- **Train Machine Learning Models**: `http://127.0.0.1:8000/train_model/`
+- **View All Prediction Logs**: `http://127.0.0.1:8000/View_Prediction_Of_WasteWater_Pollution_Type/`
+- **View Prediction Analytics**: `http://127.0.0.1:8000/View_Prediction_Of_WasteWater_Pollution_Type_Ratio/`
+- **Export Dataset (`.xls`)**: `http://127.0.0.1:8000/Download_Predicted_DataSets/`---
+
 ## Installation Instructions (Windows)
 
 ### Prerequisites
