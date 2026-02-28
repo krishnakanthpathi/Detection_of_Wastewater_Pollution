@@ -54,3 +54,49 @@ python manage.py runserver
 ```
 
 You can now access the project at `http://127.0.0.1:8000/`.
+
+---
+
+## Installation Instructions (Windows)
+
+### Prerequisites
+- [Python 3.11](https://www.python.org/downloads/release/python-3110/) (Make sure to check "Add Python to PATH" during installation)
+- MySQL Server (for the database backend)
+- [Microsoft Visual C++ 14.0 or greater](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (often required when compiling `mysqlclient` and some ML dependencies on Windows)
+
+### 1. Set Up Virtual Environment
+Open your Command Prompt or PowerShell, navigate to the project directory, and create a virtual environment:
+```cmd
+python -m venv .venv
+```
+
+Activate the virtual environment:
+- **Command Prompt:** `\.venv\Scripts\activate.bat`
+- **PowerShell:** `.\.venv\Scripts\Activate.ps1`
+
+### 2. Install Python Dependencies
+Once activated, install the required packages. (Windows does not usually require `pkg-config`, but having the C++ Build Tools installed is recommended in case `mysqlclient` requires compilation):
+```cmd
+pip install -r service_provider\requirements.txt
+```
+
+### 3. Database Setup
+Create the MySQL database named `detection_of_wastewater_pollution`. Run this in your MySQL console:
+```sql
+CREATE DATABASE IF NOT EXISTS detection_of_wastewater_pollution;
+```
+
+Apply the database migrations with the `--fake` flag to sync the renamed Django apps (`remote_user` and `service_provider`):
+```cmd
+python manage.py migrate remote_user --fake
+python manage.py migrate service_provider --fake
+python manage.py migrate
+```
+
+### 4. Run the Server
+Start the Django development server:
+```cmd
+python manage.py runserver
+```
+
+You can now access the project at `http://127.0.0.1:8000/`.
