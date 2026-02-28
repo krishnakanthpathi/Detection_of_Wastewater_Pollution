@@ -3,8 +3,8 @@ from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Remote_User import views as remoteuser
-from Service_Provider import views as serviceprovider
+from remote_user import views as remoteuser
+from service_provider import views as serviceprovider
 
 
 urlpatterns = [

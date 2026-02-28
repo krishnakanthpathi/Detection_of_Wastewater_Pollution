@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ClientSiteConfig(AppConfig):
-    name = 'Remote_User'
+    name = 'remote_user'

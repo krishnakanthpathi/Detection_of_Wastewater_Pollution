@@ -12,7 +12,7 @@ from sklearn.ensemble import VotingClassifier
 #model selection
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 # Create your views here.
-from Remote_User.models import ClientRegister_Model,predict_water_type,detection_ratio,detection_accuracy
+from remote_user.models import ClientRegister_Model,predict_water_type,detection_ratio,detection_accuracy
 
 def login(request):
 
