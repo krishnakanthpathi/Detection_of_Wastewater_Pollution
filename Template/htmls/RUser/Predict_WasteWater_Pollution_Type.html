@@ -1,0 +1,212 @@
+{% extends 'RUser/design.html' %}
+{% block userblock %}
+
+<style>
+    /* Page spacing */
+    .page-wrap{
+        padding: 10px 0 30px 0;
+    }
+
+    /* Main card */
+    .form-card{
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.10);
+        overflow: hidden;
+    }
+
+    /* Header */
+    .form-header{
+        padding: 22px 24px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .form-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .form-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    /* Body */
+    .form-body{
+        padding: 22px 24px;
+        background: #ffffff;
+    }
+
+    /* Label */
+    .form-label{
+        font-size: 13px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+
+    /* Inputs */
+    .form-control{
+        border-radius: 12px;
+        padding: 11px 12px;
+        font-size: 14px;
+        border: 1px solid #e5e7eb;
+        box-shadow: none !important;
+    }
+
+    .form-control:focus{
+        border-color: #3b82f6;
+    }
+
+    /* Button */
+    .btn-predict{
+        border-radius: 14px;
+        padding: 12px 18px;
+        font-weight: 700;
+        font-size: 14px;
+        border: none;
+        width: 100%;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+        transition: 0.25s ease-in-out;
+    }
+
+    .btn-predict:hover{
+        transform: translateY(-1px);
+        box-shadow: 0px 12px 26px rgba(37,99,235,0.25);
+    }
+
+    /* Result Box */
+    .result-card{
+        margin-top: 18px;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        padding: 16px;
+    }
+
+    .result-title{
+        font-size: 13px;
+        font-weight: 700;
+        color: #6b7280;
+        margin-bottom: 6px;
+    }
+
+    .result-value{
+        font-size: 18px;
+        font-weight: 800;
+        color: #dc2626;
+        margin: 0;
+    }
+</style>
+
+<div class="container page-wrap">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11 col-sm-12">
+
+            <div class="form-card">
+
+                <!-- Header -->
+                <div class="form-header">
+                    <h4>💧 Water Pollution Status Prediction</h4>
+                    <p>Enter the water parameters to predict the pollution status.</p>
+                </div>
+
+                <!-- Body -->
+                <div class="form-body">
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label class="form-label">Fid</label>
+                                <input type="text" name="Fid" class="form-control" placeholder="Enter Fid">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Monitoring Location Name</label>
+                                <input type="text" name="Name_of_Monitoring_Location" class="form-control" placeholder="Enter Location Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Type of Water Body</label>
+                                <input type="text" name="Type_Water_Body" class="form-control" placeholder="Example: River / Lake">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">State Name</label>
+                                <input type="text" name="State_Name" class="form-control" placeholder="Enter State Name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Temperature</label>
+                                <input type="text" name="Temperature" class="form-control" placeholder="Enter Temperature">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Dissolved Oxygen (mg/L)</label>
+                                <input type="text" name="Dissolved_Oxygen_mgperL" class="form-control" placeholder="Enter Dissolved Oxygen">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">pH</label>
+                                <input type="text" name="pH" class="form-control" placeholder="Enter pH Value">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Conductivity (mhos/cm)</label>
+                                <input type="text" name="Conductivity_mhospercm" class="form-control" placeholder="Enter Conductivity">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">BOD (mg/L)</label>
+                                <input type="text" name="BOD_mgperL" class="form-control" placeholder="Enter BOD">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Nitrate & Nitrite (mg/L)</label>
+                                <input type="text" name="NitrateN_NitriteN_mgperL" class="form-control" placeholder="Enter Nitrate/Nitrite">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Fecal Coliform (MPN/100ml)</label>
+                                <input type="text" name="Fecal_Coliform_MPNper100ml" class="form-control" placeholder="Enter Fecal Coliform">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Total Coliform (MPN/100ml)</label>
+                                <input type="text" name="Total_Coliform_MPNper100ml" class="form-control" placeholder="Enter Total Coliform">
+                            </div>
+
+                            <!-- Button -->
+                            <div class="col-12 mt-2">
+                                <button type="submit" name="submit" class="btn-predict">
+                                    🔍 Predict Pollution Status
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <!-- RESULT -->
+                    {% if objs %}
+                    <div class="result-card">
+                        <div class="result-title">Prediction Result</div>
+                        <p class="result-value">{{objs}}</p>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

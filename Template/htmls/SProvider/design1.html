@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+
+            background: url("{% static 'bg.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.70);
+            z-index: -1;
+        }
+
+        /* Top Title */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            padding: 26px 12px 8px 12px;
+            letter-spacing: 0.2px;
+        }
+
+        .sub-title {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.80);
+            margin-bottom: 18px;
+        }
+
+        /* Navbar */
+        .custom-navbar {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 12px 14px;
+            margin: 0 auto;
+            max-width: 1250px;
+        }
+
+        .custom-navbar .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 10px 14px !important;
+            border-radius: 12px;
+            transition: 0.25s ease-in-out;
+            margin: 4px;
+            white-space: nowrap;
+        }
+
+        .custom-navbar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* Logout */
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.25) !important;
+        }
+
+        /* Main content */
+        .mainholder {
+            max-width: 1250px;
+            margin: 22px auto;
+            padding: 12px;
+        }
+
+        @media(max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Title -->
+    <div class="main-title">
+        Detection of Wastewater Pollution Through Natural Language Generation
+    </div>
+    <div class="sub-title">
+        Service Provider Dashboard | Training • Charts • Reports • Users
+    </div>
+
+    <!-- Navbar -->
+    <div class="custom-navbar">
+        <ul class="nav justify-content-center flex-wrap">
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'train_model' %}">
+                    📂 Browse Datasets & Train/Test
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'likeschart' 'bar' %}">
+                    📊 Accuracy Bar Chart
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'charts1' 'line' %}">
+                    📈 Accuracy Results
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'View_Prediction_Of_WasteWater_Pollution_Type' %}">
+                    💧 View Predictions
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'View_Prediction_Of_WasteWater_Pollution_Type_Ratio' %}">
+                    🧪 Pollution Type Ratio
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Download_Predicted_DataSets' %}">
+                    ⬇️ Download Predicted Dataset
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'charts' 'line' %}">
+                    📉 Ratio Results Chart
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'View_Remote_Users' %}">
+                    👥 View Remote Users
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link logout-btn" href="{% url 'login' %}">
+                    🚪 Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- Page Content -->
+    <div class="mainholder">
+        {% block researchblock %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

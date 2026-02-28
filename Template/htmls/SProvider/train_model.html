@@ -1,0 +1,144 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    body{
+        background: #f3f6ff !important;
+    }
+
+    .page-wrap{
+        padding: 20px 10px;
+    }
+
+    /* Main card */
+    .result-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    /* Header */
+    .result-header{
+        padding: 18px 22px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .result-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .result-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    /* Body */
+    .result-body{
+        padding: 18px 22px;
+        background: #ffffff;
+    }
+
+    /* Table styling */
+    .table thead th{
+        background: #f3f4f6;
+        color: #111827;
+        font-weight: 800;
+        font-size: 13px;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 14px;
+    }
+
+    .table tbody td{
+        padding: 14px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #111827;
+        border-bottom: 1px solid #eef2f7;
+        vertical-align: middle;
+    }
+
+    .model-name{
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .accuracy-badge{
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 13px;
+        background: #ecfeff;
+        border: 1px solid #a5f3fc;
+        color: #0f172a;
+    }
+
+    /* Empty message */
+    .empty-msg{
+        text-align: center;
+        padding: 35px 10px;
+        color: #6b7280;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container page-wrap">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11 col-sm-12">
+
+            <div class="result-card">
+
+                <!-- Header -->
+                <div class="result-header">
+                    <h4>📌 Trained & Tested Results</h4>
+                    <p>Below table shows model types and their accuracy results.</p>
+                </div>
+
+                <!-- Body -->
+                <div class="result-body">
+
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+
+                            <thead>
+                                <tr>
+                                    <th>Model Type</th>
+                                    <th class="text-center">Accuracy</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for object in objs %}
+                                <tr>
+                                    <td class="model-name">{{object.names}}</td>
+                                    <td class="text-center">
+                                        <span class="accuracy-badge">{{object.ratio}}</span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="2" class="empty-msg">
+                                        No results available.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    body{
+        background: #f3f6ff !important;
+    }
+
+    .page-wrap{
+        padding: 20px 10px;
+    }
+
+    /* Main card */
+    .content-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    /* Header */
+    .content-header{
+        padding: 18px 22px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .content-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .content-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    /* Body */
+    .content-body{
+        padding: 20px 22px;
+        background: #ffffff;
+    }
+
+    /* Scroll box */
+    .data-box{
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        background: #f9fafb;
+        padding: 14px;
+        height: 420px;
+        overflow-y: auto;
+        font-size: 14px;
+        color: #111827;
+    }
+
+    /* Empty message */
+    .empty-text{
+        color: #6b7280;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 160px;
+    }
+
+    @media(max-width: 768px){
+        .data-box{
+            height: 300px;
+        }
+    }
+</style>
+
+<div class="container page-wrap">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11 col-sm-12">
+
+            <div class="content-card">
+
+                <!-- Header -->
+                <div class="content-header">
+                    <h4>📄 Data Viewer</h4>
+                    <p>View generated content, logs, or processed dataset information.</p>
+                </div>
+
+                <!-- Body -->
+                <div class="content-body">
+
+                    <!-- Scrollable Content Area -->
+                    <div class="data-box">
+
+                        <!-- Replace or fill this with dynamic data if needed -->
+                        <p class="empty-text">
+                            No data available to display.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

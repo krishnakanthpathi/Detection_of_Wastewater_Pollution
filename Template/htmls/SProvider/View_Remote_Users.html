@@ -1,0 +1,176 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    body{
+        background: #f3f6ff !important;
+    }
+
+    .page-wrap{
+        padding: 20px 10px;
+    }
+
+    /* Main card */
+    .users-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    /* Header */
+    .users-header{
+        padding: 18px 22px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .users-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .users-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    /* Body */
+    .users-body{
+        padding: 18px 22px;
+        background: #ffffff;
+    }
+
+    /* Scrollable table */
+    .table-wrap{
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        overflow: auto;
+        max-height: 520px;
+        background: #ffffff;
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1200px;
+    }
+
+    thead th{
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #f3f4f6;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 14px 12px;
+        border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    tbody td{
+        padding: 13px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #111827;
+        border-bottom: 1px solid #eef2f7;
+        vertical-align: top;
+        white-space: nowrap;
+    }
+
+    tbody tr:hover{
+        background: #f9fafb;
+    }
+
+    /* Email */
+    .email-text{
+        color: #2563eb;
+        font-weight: 700;
+    }
+
+    /* Empty */
+    .empty-msg{
+        text-align: center;
+        padding: 35px 10px;
+        color: #6b7280;
+        font-weight: 600;
+    }
+
+    @media(max-width: 768px){
+        .table-wrap{
+            max-height: 420px;
+        }
+    }
+</style>
+
+<div class="container page-wrap">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="users-card">
+
+                <!-- Header -->
+                <div class="users-header">
+                    <h4>👥 View All Remote Users</h4>
+                    <p>Below table shows all registered remote user details.</p>
+                </div>
+
+                <!-- Body -->
+                <div class="users-body">
+
+                    <div class="table-wrap">
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Mobile</th>
+                                    <th>Country</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Address</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for o in objects %}
+                                <tr>
+                                    <td>{{o.username}}</td>
+                                    <td class="email-text">{{o.email}}</td>
+                                    <td>{{o.gender}}</td>
+                                    <td>{{o.phoneno}}</td>
+                                    <td>{{o.country}}</td>
+                                    <td>{{o.state}}</td>
+                                    <td>{{o.city}}</td>
+                                    <td style="white-space: normal; min-width: 250px;">
+                                        {{o.address}}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="8" class="empty-msg">
+                                        No remote users found.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

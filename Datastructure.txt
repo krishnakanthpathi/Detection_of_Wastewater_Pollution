@@ -1,0 +1,37 @@
+Detection of Wastewater Pollution Through Natural Language Generation With a Low-Cost Sensing Platform
+
+
+
+IEEE Transactoin On Machine Learning,Volume:11,Issue Date:30.May.2023
+
+
+
+Water pollution,language models,causal models,low-cost sensors.
+
+
+Detection_of_Wastewater_Pollution
+
+
+
+detection_of_wastewater_pollution
+
+
+
+predict_water_type
+
+
+Fid	
+Name_of_Monitoring_Location	
+Type_Water_Body	
+State_Name	
+Temperature	
+Dissolved_Oxygen_mgperL	
+pH	
+Conductivity_mhospercm	
+BOD_mgperL	
+NitrateN_NitriteN_mgperL	
+Fecal_Coliform_MPNper100ml	
+Total_Coliform_MPNper100ml
+Prediction
+
+

@@ -1,0 +1,192 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    body{
+        background: #f3f6ff !important;
+    }
+
+    .chart-page{
+        padding: 18px 10px;
+    }
+
+    /* Sidebar */
+    .side-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        padding: 18px;
+        height: 100%;
+    }
+
+    .side-card h5{
+        font-size: 16px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 14px;
+    }
+
+    .chart-btn{
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 12px 14px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        color: #111827;
+        transition: 0.25s ease-in-out;
+        text-align: center;
+    }
+
+    .chart-btn:hover{
+        background: #eef2ff;
+        border-color: #c7d2fe;
+        transform: translateY(-1px);
+    }
+
+    .chart-btn.active{
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+        border: none;
+        box-shadow: 0px 12px 26px rgba(37,99,235,0.25);
+    }
+
+    /* Chart card */
+    .chart-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .chart-header{
+        padding: 18px 20px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .chart-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .chart-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    .chart-body{
+        padding: 18px 18px 22px 18px;
+        background: #ffffff;
+    }
+
+    #chartContainer{
+        width: 100%;
+        height: 420px;
+        border-radius: 14px;
+        border: 1px solid #eef2f7;
+        background: #f9fafb;
+        padding: 6px;
+    }
+
+    @media(max-width: 768px){
+        #chartContainer{
+            height: 320px;
+        }
+    }
+</style>
+
+<div class="container chart-page">
+    <div class="row g-4">
+
+        <!-- LEFT MENU -->
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="side-card">
+                <h5>📊 Chart Options</h5>
+
+                <a href="{% url 'dislikeschart' 'pie' %}"
+                   class="chart-btn {% if dislike_chart == 'pie' %}active{% endif %}">
+                    🥧 Pie Chart
+                </a>
+
+                <a href="{% url 'dislikeschart' 'bar' %}"
+                   class="chart-btn {% if dislike_chart == 'bar' %}active{% endif %}">
+                    📊 Bar Chart
+                </a>
+
+                <a href="{% url 'dislikeschart' 'spline' %}"
+                   class="chart-btn {% if dislike_chart == 'spline' %}active{% endif %}">
+                    📉 Spline Chart
+                </a>
+
+                <hr>
+
+                <p style="font-size:12px;color:#6b7280;margin:0;">
+                    Select any chart type to view the trained and tested accuracy chart results.
+                </p>
+            </div>
+        </div>
+
+        <!-- RIGHT CHART -->
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <div class="chart-card">
+
+                <div class="chart-header">
+                    <h4>Trained & Tested Accuracy (Bar/Pie)</h4>
+                    <p>Graphical visualization of trained and tested accuracy results.</p>
+                </div>
+
+                <div class="chart-body">
+                    <div id="chartContainer"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- CanvasJS -->
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<script>
+window.onload = function () {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        backgroundColor: "transparent",
+        title: { text: "" },
+
+        data: [{
+            {% if dislike_chart == "bar" %}
+                type: "bar",
+            {% elif dislike_chart == "pie" %}
+                type: "pie",
+            {% elif dislike_chart == "spline" %}
+                type: "spline",
+            {% endif %}
+
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {% for o in form %}
+                    { y: {{o.dcount}}, label: "{{o.names}}" },
+                {% endfor %}
+            ]
+        }]
+    });
+
+    chart.render();
+}
+</script>
+
+{% endblock %}

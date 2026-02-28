@@ -1,0 +1,189 @@
+{% extends 'SProvider/design1.html' %}
+{% block researchblock %}
+
+<style>
+    body{
+        background: #f3f6ff !important;
+    }
+
+    .page-wrap{
+        padding: 20px 10px;
+    }
+
+    /* Main card */
+    .data-card{
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(229,231,235,0.8);
+        border-radius: 18px;
+        box-shadow: 0px 14px 35px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    /* Header */
+    .data-header{
+        padding: 18px 22px;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        color: white;
+    }
+
+    .data-header h4{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .data-header p{
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    /* Body */
+    .data-body{
+        padding: 18px 22px;
+        background: #ffffff;
+    }
+
+    /* Scrollable table */
+    .table-wrap{
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        overflow: auto;
+        max-height: 520px;
+        background: #ffffff;
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1400px; /* keeps table readable */
+    }
+
+    thead th{
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #f3f4f6;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 14px 12px;
+        border-bottom: 1px solid #e5e7eb;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    tbody td{
+        padding: 13px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #111827;
+        border-bottom: 1px solid #eef2f7;
+        white-space: nowrap;
+    }
+
+    tbody tr:hover{
+        background: #f9fafb;
+    }
+
+    /* Prediction badge */
+    .pred-badge{
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 12px;
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+        color: #1d4ed8;
+    }
+
+    /* Empty message */
+    .empty-msg{
+        text-align: center;
+        padding: 35px 10px;
+        color: #6b7280;
+        font-weight: 600;
+    }
+
+    @media(max-width: 768px){
+        .table-wrap{
+            max-height: 420px;
+        }
+    }
+</style>
+
+<div class="container page-wrap">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="data-card">
+
+                <!-- Header -->
+                <div class="data-header">
+                    <h4>💧 Wastewater Pollution Prediction Details</h4>
+                    <p>Below table shows the dataset values and predicted pollution type.</p>
+                </div>
+
+                <!-- Body -->
+                <div class="data-body">
+
+                    <div class="table-wrap">
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Fid</th>
+                                    <th>Monitoring Location</th>
+                                    <th>Water Body</th>
+                                    <th>State</th>
+                                    <th>Temperature</th>
+                                    <th>Dissolved Oxygen</th>
+                                    <th>pH</th>
+                                    <th>Conductivity</th>
+                                    <th>BOD</th>
+                                    <th>Nitrate/Nitrite</th>
+                                    <th>Fecal Coliform</th>
+                                    <th>Total Coliform</th>
+                                    <th>Prediction</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for object in list_objects %}
+                                <tr>
+                                    <td>{{object.Fid}}</td>
+                                    <td>{{object.Name_of_Monitoring_Location}}</td>
+                                    <td>{{object.Type_Water_Body}}</td>
+                                    <td>{{object.State_Name}}</td>
+                                    <td>{{object.Temperature}}</td>
+                                    <td>{{object.Dissolved_Oxygen_mgperL}}</td>
+                                    <td>{{object.pH}}</td>
+                                    <td>{{object.Conductivity_mhospercm}}</td>
+                                    <td>{{object.BOD_mgperL}}</td>
+                                    <td>{{object.NitrateN_NitriteN_mgperL}}</td>
+                                    <td>{{object.Fecal_Coliform_MPNper100ml}}</td>
+                                    <td>{{object.Total_Coliform_MPNper100ml}}</td>
+                                    <td><span class="pred-badge">{{object.Prediction}}</span></td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="13" class="empty-msg">
+                                        No prediction records available.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
